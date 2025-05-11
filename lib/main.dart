@@ -46,30 +46,33 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _tambahKas() {
-    if (_formKey.currentState!.validate()) {
-      final newItem = KasItem(
-        id: const Uuid().v4(),
-        jenis: _selectedJenis,
-        nominal: double.parse(_nominalController.text),
-        keterangan: _keteranganController.text,
-        tanggal: _selectedDate,
-      );
+    print('Klik tombol Tambah');
 
-      setState(() {
-        _kasList.add(newItem);
-        _nominalController.clear();
-        _keteranganController.clear();
-        _selectedDate = DateTime.now();
-      });
-    }
+  if (_formKey.currentState!.validate()) {
+    print('From Valid, tambah item');
+    final newItem = KasItem(
+      id: const Uuid().v4(),
+      jenis: _selectedJenis,
+      nominal: double.parse(_nominalController.text),
+      keterangan: _keteranganController.text,
+      tanggal: _selectedDate,
+    );
+
+    setState(() {
+      _kasList.add(newItem); // Tambah item ke daftar
+      _nominalController.clear();
+      _keteranganController.clear();
+    });
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
     final formatCurrency = NumberFormat.currency(locale: 'id', symbol: 'Rp ');
     final formatDate = DateFormat('dd MMM yyyy');
 
-    return Scaffold(
+    return Scaffold( // <-pastikan ada return di sini
       appBar: AppBar(
         title: const Text('Kas RT / Warga'),
         backgroundColor: Colors.green[700],
